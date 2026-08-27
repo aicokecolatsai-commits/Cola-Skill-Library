@@ -15,10 +15,10 @@ Cola-Skill-Library/
 │
 ├── workflow-skills/        # 🧠 高階獨立與專家思維工作流技能
 │   ├── noah-ergo-image/    # Noah 人因小管家社群對比圖產圖工作流 (v2)
-│   ├── 00_cola_ergo/       # Noah 人因圖卡 (舊版，已由 noah-ergo-image 取代)
-│   ├── minerva-thinking/   # 密涅瓦大學 100+ HCs 思考模塊與決策引導
-│   ├── humanizer-zh-tw/    # 繁中去 AI 腔與人性化寫作
-│   ├── grill-me/           # 嚴格質詢與思維壓力測試
+│   ├── minerva-thinking/   # 密涅瓦大學 76 HCs 思考習慣與多元思維模型引導
+│   ├── directing-ai/       # 指揮 AI 四步驟方法論（PRD規格書 / 打造專業分身 / 組隊思考 / RPG陪練）
+│   ├── humanizer-zh-tw/    # 繁中去 AI 腔與人性化寫作 (融合 24 條語病與瓦基人味雙核心)
+│   ├── grill-me/           # 嚴格質詢與思維壓力測試 (Grill-Me / Grilling)
 │   ├── ui-ux-pro-max/      # 旗艦級 UI/UX 設計系統與元件庫
 │   ├── brainstorming/      # 蘇格拉底式創意與需求深度探索引導
 │   ├── skill-creator/      # 技能開發、評測與自動優化工作台
