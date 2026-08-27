@@ -1,0 +1,34 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+.BIN/
+
+# Environment & Sensitive Information
+.env
+.env.*
+*.key
+*.pem
+*.secret
+*credentials*.json
+*token*.json
+
+# Logs & Cache
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node / Dependencies
+node_modules/
+
+# Temporary & Local
+.trash/
+scratch/
+.system_generated/
+
+# Heavy local archive snapshot
+_archive/14-codex-skills/

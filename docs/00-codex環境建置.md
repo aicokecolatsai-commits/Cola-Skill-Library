@@ -1,0 +1,168 @@
+# Codex 懶人包 #00：環境建置
+
+> 版本：v0.3（Codex 版）
+> 更新日期：2026-05-19
+
+> ✅ 本懶人包以 **Codex Desktop app（macOS/Windows）** 為主軸；同時相容 IDE 擴充與 CLI。
+
+---
+
+## 這個懶人包會幫你做什麼？
+
+把使用 Codex 懶人包所需的環境一次建置完成：
+- 安裝 **Codex Desktop app**
+- 安裝 Git、GitHub CLI、Node.js、uv
+- 登入 OpenAI（ChatGPT 帳號或 API Key）
+- 驗證一切正常
+
+> 💡 **本懶人包只負責安裝工具，不含 GitHub 帳號登入。** 需要連接 GitHub、把教材推上線，請接著執行 **懶人包 #02：連接 GitHub**（內含帳號註冊引導，沒有 GitHub 帳號也能從那裡開始）。
+
+---
+
+## 先備條件
+
+- [ ] OpenAI 帳號（ChatGPT Plus/Pro/Business/Edu 或 API 額度）
+- [ ] 電腦有網路連線
+
+---
+
+## 請 Codex 幫我執行以下步驟
+
+> ⚠️ 把這份 MD 檔的內容貼給 Codex Desktop 對話框，它會自動執行。
+> 遇到需要手動操作（🖐️）的地方會暫停指示你。
+
+---
+
+### 步驟零：環境檢查
+
+請 Codex 執行以下檢查並把缺少的記下來：
+
+1. **作業系統**：Windows / macOS / Linux（Linux 沒有 Desktop app，請走 IDE 擴充或 CLI）
+2. **網路連線**
+3. **Node.js**（後續 MCP 工具需要）：`node --version`（需 18+）
+4. **Git**：`git --version`
+5. **GitHub CLI**：`gh --version`
+6. **uv**（Python 工具管理器）：`uv --version`
+
+---
+
+### 步驟一：安裝 Codex Desktop app
+
+🖐️ **手動操作**：
+
+1. 到 [OpenAI Codex 官方下載頁](https://developers.openai.com/codex/app)
+2. 選 macOS（Intel 或 Apple Silicon）或 Windows 安裝檔
+3. 安裝完成、開啟 app
+4. **Sign in with ChatGPT**（建議，OAuth 自動處理；ChatGPT Plus/Pro 等訂閱會自動讓 Codex 用）
+   - 也可以選 Sign in with API Key，貼 `sk-...` 開頭的 OpenAI API Key
+5. 登入完看到 Codex 主畫面 = OK
+
+> 💡 **不在 Mac/Win**？改裝 IDE 擴充：VSCode / Cursor / Windsurf 的 Marketplace 搜「ChatGPT」（OpenAI 官方）；或 CLI：`npm install -g @openai/codex`。三者設定共用，後面所有懶人包都通用。
+
+---
+
+### 步驟二：安裝 Node.js（如果未安裝或版本 < 18）
+
+> 💡 不是 Codex 本體要的（Desktop app 自帶執行環境），但**幾乎所有 MCP server 都需要 Node.js**（NotebookLM、Obsidian、Supabase、Firebase 等）。
+
+**Windows**：
+```bash
+winget install --id OpenJS.NodeJS --accept-source-agreements --accept-package-agreements
+```
+
+**macOS**：
+```bash
+brew install node
+```
+
+**Linux（Ubuntu/Debian）**：
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+確認：`node --version`
+
+---
+
+### 步驟三：安裝 Git（如果未安裝）
+
+**Windows**：
+```bash
+winget install --id Git.Git --accept-source-agreements --accept-package-agreements
+```
+
+**macOS**：`xcode-select --install`
+
+**Linux**：`sudo apt update && sudo apt install git -y`
+
+確認：`git --version`
+
+---
+
+### 步驟四：安裝 GitHub CLI（如果未安裝）
+
+**Windows**：
+```bash
+winget install --id GitHub.cli --accept-source-agreements --accept-package-agreements
+```
+
+**macOS**：`brew install gh`
+
+**Linux**：見 [GitHub CLI 官方安裝指引](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
+
+確認：`gh --version`
+
+---
+
+### 步驟五：安裝 uv（如果未安裝）
+
+uv 是 Python 套件管理工具，後續安裝 NotebookLM 等 MCP 工具會用到。
+
+**Windows（PowerShell）**：
+```bash
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+**macOS / Linux**：
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+確認：`uv --version`
+
+---
+
+### 步驟六：最終驗證
+
+```bash
+git --version
+gh --version
+node --version
+uv --version
+```
+
+並回 Codex Desktop 主畫面，確認 app 顯示已登入、可正常對話。
+
+> ✅ 「環境建置完成！你的電腦已經準備好使用所有 Codex 懶人包了。」
+
+---
+
+## 常見問題
+
+| 問題 | 解法 |
+|------|------|
+| Desktop app 開不起來 | macOS：右鍵→開啟（首次繞 Gatekeeper）；Win：以系統管理員身分執行一次 |
+| Sign in with ChatGPT 卡住 | 改用 Sign in with API Key；或檢查瀏覽器是否封鎖 OAuth 跳轉 |
+| Linux 沒有 Desktop app | 改用 VSCode 擴充（搜「ChatGPT」OpenAI 官方）或 CLI（`npm i -g @openai/codex`） |
+| winget 找不到 | Windows 10 1809+ 內建；或到 Microsoft Store 安裝「App Installer」 |
+| Node.js 版本太舊 | 移除舊版重裝最新 LTS |
+| 公司電腦裝不了 winget / brew | Codex Desktop app 安裝檔是直接 `.dmg`/`.exe`，不需套件管理器 |
+
+---
+
+## 相關連結
+
+- [OpenAI Codex 官方下載](https://developers.openai.com/codex/app)
+- [Codex IDE 擴充](https://developers.openai.com/codex/ide)
+- [Codex CLI](https://developers.openai.com/codex/cli)

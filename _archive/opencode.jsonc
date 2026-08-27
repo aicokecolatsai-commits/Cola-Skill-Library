@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx.cmd", "-y", "@playwright/mcp"]
+    },
+    "firecrawl": {
+      "type": "local",
+      "command": ["npx.cmd", "-y", "firecrawl-mcp"],
+      "environment": {
+        "FIRECRAWL_API_KEY": "fc-02ad54118eac42f2a469b2a6ff075f20"
+      }
+    }
+  }
+}
