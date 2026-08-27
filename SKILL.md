@@ -9,7 +9,7 @@ description: Cola 跨平台 AI Agent 技能庫全集入口 — 提供高階工�
 
 ## 步驟一：列出技能分類
 
-向使用者展示兩大類技能：
+向使用者展示三大類技能：
 1. **🧠 高階工作流技能 (Workflow Skills)**：
    * `minerva-thinking`：密涅瓦大學 100+ HCs 思考模塊與深層決策引導
    * `ui-ux-pro-max`：旗艦級 UI/UX 設計系統與元件庫
@@ -20,8 +20,20 @@ description: Cola 跨平台 AI Agent 技能庫全集入口 — 提供高階工�
    * `persona-coach`：多角色顧問諮詢教練 (Noah, Rose, Mark, Lucas...)
    * `meta-prompt`：YAML 結構化 Prompt 與系統指令架構師
    * `00_cola_ergo`：Noah 人因小管家圖卡與對比圖產生器
+   * 學術系列：`academic-deep-research`、`academic-paper`、`academic-paper-reviewer`、`academic-pipeline`
+   * 內容與生活：`article-noah`、`cola-uiux-game-design`、`draw`、`職場人因文案專家`、`presentation-coach`、`resume-builder`、`habit-tracker`
+   * 專案流程：`project-init`、`startup`、`shutdown`
 
-2. **🛠️ 教學系列懶人包 (Lazy Packs)**：
+2. **⚙️ 工程與寫作技能集 (Engineering Skills)**：
+   * 工程工作流：`code-review`、`tdd`、`diagnosing-bugs`、`implement`、`research`、`prototype`、`qa`、`triage`、`wayfinder`、`to-spec`、`to-tickets` 等
+   * 密集面試：`grill-me`、`grilling`、`batch-grill-me`、`grill-with-docs`、`loop-me`
+   * 交接協作：`handoff`、`claude-handoff`、`ask-matt`
+   * 架構設計：`codebase-design`、`design-an-interface`、`domain-modeling`、`improve-codebase-architecture`
+   * 寫作：`writing-beats`、`writing-fragments`、`writing-shape`、`writing-great-skills`、`edit-article`
+   * 工具設定：`setup-pre-commit`、`setup-ts-deep-modules`、`wizard`、`setup-matt-pocock-skills` 等
+   * 完整 41 個請見 `engineering-skills/` 目錄
+
+3. **🛠️ 教學系列懶人包 (Lazy Packs)**：
    * `00-env-setup`、`01-notebooklm`、`03-github`、`05-obsidian`、`07-supabase`、`08-firebase`、`09-ollama`、`10-gemini`、`11-workspace`、`12-draw` 等。
 
 ## 步驟二：確認使用者需求並安裝
