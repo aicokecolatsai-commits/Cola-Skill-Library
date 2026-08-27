@@ -15,6 +15,7 @@ Cola-Skill-Library/
 │
 ├── workflow-skills/        # 🧠 高階獨立與專家思維工作流技能
 │   ├── minerva-thinking/   # 密涅瓦大學 100+ HCs 思考模塊與決策引導
+│   ├── grill-me/           # 嚴格質詢與思維壓力測試 (Grill-Me / Grilling)
 │   ├── ui-ux-pro-max/      # 旗艦級 UI/UX 設計系統與元件庫
 │   ├── brainstorming/      # 蘇格拉底式創意與需求深度探索引導
 │   ├── skill-creator/      # 技能開發、評測與自動優化工作台
