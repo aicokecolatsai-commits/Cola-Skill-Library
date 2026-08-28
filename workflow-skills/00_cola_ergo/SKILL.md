@@ -1,90 +1,152 @@
 ---
-name: 00-cola-ergo
-description: COLA / Noah 人因小管家共用技能，用於 Codex 與 Antigravity 產出真人照片式人因社群圖、FB/IG/Threads 正確錯誤對比圖、透明壓字版型、透明背景素材支援，以及不覆蓋舊檔的版控輸出。當使用者提到 Noah、人因小管家、人因工程、職安評估、正確錯誤對比圖、真人照片配圖、透明背景圖、Antigravity 共用技能時使用。
+name: blogger-auto-publisher
+description: Blogger 多平台自動發布、人因小管家知識庫管理、密涅瓦思維寫作法、身體折舊論哲學、全場景知識地圖與圖片防呆發布 SOP。當使用者提到「發布文章」、「Blogger發文」、「寫作架構」、「密涅瓦人因」、「身體折舊」、「知識地圖」、「破圖排查」、「人因小管家」時載入。
 ---
 
-# 00_cola_ergo
+# Blogger 自動發布與人因小管家寫作技能 (Blogger Auto-Publisher & Noah Ergonomics Engine)
 
-## 定位
+本技能規範「人因大系統，直覺小管家（Noah）」的部落格核心哲學（身體折舊論）、密涅瓦 HCs 寫作架構、語言風格、全場景知識地圖維護、**文章處理嚴格隔離機制**、**四道防線人機審查機制**、**去 AI 腔與台灣在地化防大陸用語**、**同環境生圖規格**以及**Noah 官方合併圖設計系統**。
 
-這是 COLA / Noah 人因小管家在 Codex 與 Antigravity 共用的技能。用途是把人因工程主題做成溫暖、生活化、去醫療化的社群圖，尤其適合「正確 vs 錯誤」對比圖。
+---
 
-輸出風格以真人照片為主，不使用 SVG 代替照片。人物需符合在地感，優先使用台灣人或亞洲人。若主題聚焦在腳、手、肩頸、腰背等局部風險，照片也應聚焦該部位，不一定要出現整個人。
+## 🛡️ 核心鐵律一：四道防線人機審查機制 (Mandatory 4-Step Review Gate)
 
-## 固定原則
+在進行任何文章起草、排程或發布時，必須嚴格遵守四道防線：
 
-- 回應與圖中文字使用繁體中文。
-- 文案用日常語氣，不做醫療診斷感的表述。
-- 底圖使用真人照片或真實情境照片，不用插畫、SVG、3D 假圖。
-- 圖片主標或小標需直接出現「正確」與「錯誤」。
-- 不使用白色標題字卡蓋住背景；以透明深色漸層、文字陰影、直接壓字為主。
-- 字句要人工斷行，避免最後一行只有 `。`、`，`、`、` 等標點。
-- 新圖永遠另存版號，不覆蓋舊圖。已有無版號檔案時，下一版從 `_v2` 開始。
-- 若使用透明 PNG 底圖或透明背景素材，腳本可用 `--transparent-output` 保留 alpha。
+1. **第 1 步：選題與情境對齊 (`ask_question`)**：
+   * 詢問使用者偏好的作業場景、視角與焦點。
+2. **第 2 步：【視覺與字卡審查關卡 (Image Review Gate)】**：
+   * 生成底圖 ➔ 執行 Noah 官方排版合成 ➔ 在對話中輸出圖片並**停下來等待使用者審查**。
+   * **未獲得使用者明確批准前，嚴禁進入文案發布！**
+3. **第 3 步：【全通路文案審查關卡 (Copy Review Gate)】**：
+   * 呈現去 AI 腔、零大陸用語、極簡 30 秒社群導流文與完整部落格量表稿件 ➔ **停下來等待使用者審查**。
+   * **未獲得使用者明確批准前，嚴禁排程或發布！**
+4. **第 4 步：終審確認 ➔ 自動上架與知識地圖同步**：
+   * 上傳 CDN ➔ 轉譯零 YAML 語意化 HTML ➔ Blogger API 插入排程 ➔ 知識地圖更新 ➔ 本地雙向歸檔。
 
-## Noah 圖片規格
+---
 
-- LOGO：預設使用專案內 `input/new2.png`，必須透明貼上，不加圓形遮罩、不加框線裁切。
-- FB 對比圖：`2142x1169`，LOGO 縮放 `450x300`，置中貼在左右分割線。
-- IG / Threads：`1080x1080`，LOGO 縮放 `270x180`，貼右下角。
-- 字體：優先使用專案 `fonts/GenSenRounded2-*.ttc`。
-- 正確色：綠色系；錯誤色：紅色系。不要讓整張圖變成單一色調。
+## 🇹🇼 核心鐵律二：去 AI 腔與防大陸用語在地化防線 (Taiwan Localization)
 
-## 產出流程
+1. **極簡社群導流文（30 秒適讀）**：
+   * FB、IG、Threads 文案必須極短、吸睛、直擊痛點、嚴禁落落長無重點。
+2. **消滅 24 種 AI 語病**：
+   * 嚴禁廢話預熱（「值得注意的是...」、「事實上...」）、公式化排比（「不僅...更是...」）、公文虛詞（「進行...的動作」）。
+3. **🇹🇼 100% 台灣在地標準用語（嚴格禁止大陸用語/支語黑話）**：
+   * 螢幕（🈲屏幕）、影片（🈲視頻）、音訊（🈲音頻）、連結（🈲鏈接）、資訊（🈲信息）、軟體（🈲軟件）、硬體（🈲硬件）、記憶體（🈲內存）、預設（🈲默認）、專案（🈲項目）、品質（🈲質量/質素）、貼心（🈲走心）。
+   * 徹底消滅職場抽象黑話：賦能、閉環、抓手、底層邏輯、維度、雙向奔赴。
 
-1. 讀取專案規範：
-   - `AGENTS.md`
-   - `.agents/skills/health-noah/SKILL.md`
-   - `input/` 內的主題材料
-2. 生成或選擇兩張 1:1 底圖：
-   - `correct_base`：正確或較友善的人因姿勢 / 工具 / 環境。
-   - `incorrect_base`：錯誤或較吃力的人因姿勢 / 工具 / 環境。
-3. 底圖先存到 `output/[topic]/codex_photo_final/` 或當次指定資料夾。
-4. 使用 `scripts/compose_noah_photo_infographic.py` 合成 FB、IG、Threads。
-5. 逐張檢查：照片感、主題焦點、文字位置、LOGO、正確/錯誤標示、斷句、版號。
+---
 
-## Antigravity 透明背景注意事項
+## 🎨 核心鐵律三：生圖機制與同環境一致性 (Image Generation SOP)
 
-Antigravity 若提供透明 PNG 作為底圖或局部素材，可以直接交給合成腳本。
+1. **同一環境連續性原則 (Same-Environment Continuity)**：
+   * 左右雙格對比圖的「NG 痛點」與「推薦解方」，必須在**「完全相同的背景環境與設備（同一間工廠機台、同一間客廳地磚、同一間辦公室）」**中拍攝！
+   * 嚴禁從髒亂工廠突然跳到全新乾淨實驗室，避免產生虛假感。
+2. **真實動作自然原則 (Postural Realism)**：
+   * 肢體動作必須貼近真實人因，嚴禁過度誇張扭曲的肢體或手部分離過遠。
+3. **解剖約束與在地人物**：
+   * Prompt 必須指定 `Taiwanese / Asian person (30-35 years old)`。
+   * 嚴格肢體約束：`Exact two arms and two hands, anatomically correct body, no extra limbs, no phantom arms`。
 
-- 一般照片輸出：不加 `--transparent-output`，輸出一般 RGB PNG。
-- 透明背景輸出：加 `--transparent-output`，輸出 RGBA PNG，保留透明背景與透明素材 alpha。
-- 若透明底圖上仍需要文字可讀性，可保留腳本預設漸層；若要後續在其他軟體排版，建議先輸出透明版本，再由 Antigravity 疊到最終背景。
+---
 
-## 腳本用法
+## 📐 核心鐵律四：Noah 官方合併圖設計系統 (Graphic Composition System)
 
-從 `02-health-noah` 專案根目錄執行：
+所有對比圖與社群字卡必須嚴格符合以下設計規範：
 
-```powershell
-python "E:\SNOOCOLA\AI_Project\00_skill\00_cola_ergo\scripts\compose_noah_photo_infographic.py" `
-  --correct-base "output\04_足底筋膜炎\codex_photo_final\correct_base_photo_final_v3.png" `
-  --incorrect-base "output\04_足底筋膜炎\codex_photo_final\incorrect_base_photo_final_v3.png" `
-  --out-dir "output\04_足底筋膜炎\codex_photo_final" `
-  --slug "plantar" `
-  --main-title "足底筋膜炎｜正確 vs 錯誤站法" `
-  --correct-title "正確｜腳底別硬撐" `
-  --incorrect-title "錯誤｜薄底踩硬地" `
-  --correct-label "正確｜腳底有支撐" `
-  --incorrect-label "錯誤｜薄底踩硬地" `
-  --correct-subtitle "鞋底有支撐，地面也軟一點" `
-  --incorrect-subtitle "腳底每天都在加班" `
-  --correct-bullet "選有支撐的鞋底" `
-  --correct-bullet "腳下加一塊止滑軟墊" `
-  --correct-bullet "讓腳底少一點硬碰硬" `
-  --incorrect-bullet "薄底鞋直接踩硬地" `
-  --incorrect-bullet "腳跟與足弓容易吃力" `
-  --incorrect-bullet "久站越久越想換腳站" `
-  --fb-correct-line "鞋底穩、地面軟一點" `
-  --fb-correct-line "久站時，腳底不用一路硬撐" `
-  --fb-incorrect-line "薄底加硬地" `
-  --fb-incorrect-line "每一步都讓腳底多吃一點力" `
-  --fb-note "Noah 小提醒：先從鞋底支撐與站立地面開始調整"
-```
+### 1. 畫布規格與排版
+* **FB 橫版對照大圖 (2142 × 1169)**：左右等寬雙格，中間白色半透明分割線（寬度 4px）。
+* **IG / Threads 正方形圖卡 (1080 × 1080)**：右下角留白置放 Logo。
 
-需要透明背景輸出時，在最後加：
+### 2. 字體階層 (源泉圓體 GenSenRounded2)
+* **大標題**：`GenSenRounded2-H` (76～80px)，置中純白字＋輕微陰影。
+* **標籤列**：`GenSenRounded2-B` (40px)，採用**左側垂直色條（Vertical Accent Bar）**。
+* **說明內文**：`GenSenRounded2-B` (35～36px)，純白字＋微陰影。
+* **數字圓圈**：`GenSenRounded2-H` (24～28px)，純白字置中於實心圓圈。
 
-```powershell
-  --transparent-output
-```
+### 3. 官方標準色系
+* 🟢 **推薦 / 正確側**：Noah 官方森林綠 `(47, 116, 85, 255)` / `#2F7455`。
+* 🔴 **NG / 錯誤側**：Noah 官方磚紅 `(164, 70, 64, 255)` / `#A44640`。
 
-腳本會列出所有輸出檔案路徑。以最新列出的 FB / IG / Threads 圖作為本次成品。
+### 4. 🔴 / 🟢 實心數字圓圈（1、2、3）標籤規範
+* 底部說明項目**嚴格禁止使用普通圓點 `•`**！
+* 必須繪製**直徑 34～36px 的實心數字圓圈（NG 側為磚紅底、推薦側為森林綠底）**，內嵌純白數字 `1`、`2`、`3`。
+
+### 5. 自然環境漸變（Ambient Alpha Gradient Overlays）
+* **🈲 嚴格禁止使用遮擋畫面的深藍色實心方塊或大面積不透明底色框！**
+* 必須使用頂部（Top 205 Alpha）與底部（Bottom 195 Alpha）**自然黑透明漸層**，讓照片主體與背景紋理自然穿透，保持大氣與高級感。
+
+### 6. Noah 中央吉祥物 LOGO 規範
+* **LOGO 來源**：`02-health-noah/input/new2.png`。
+* **FB 橫版大圖**：縮放為 `450 × 300` 像素，等比例透明**精準置中貼於中央分割線上**。
+* **IG 圖卡**：縮放為 `270 × 180` 像素，貼於右下角 `(width - 292, height - 196)`。
+
+---
+
+## 🚗 核心哲學：演講級「身體折舊論」與「身體使用說明書」
+
+1. **身體也會「折舊」（Body Depreciation）**：
+   * 人的身體跟汽車一樣，每天都在折舊。長時間處在不良姿勢與高度下，關節與肌肉就是在「超速折舊」。
+2. **「每天花 30 分鐘修車，卻花 8 小時在撞車」**：
+   * 下班復健熱敷虽然舒服，但白天坐回不對的椅子、用太低的檯面，等於天天一邊修車一邊加速磨損。
+3. **人因工程是「身體的使用說明書」**：
+   * 只要在生活裡**微調 3 公分的高度、換個發力手勢、善用工學輔具**，就能大幅降低折舊速度。
+
+---
+
+## 🛡️ 圖片發布三不原則（防破圖鐵律）
+
+1. **嚴禁使用 Placeholder（假佔位網址）**。
+2. **強制直連 CDN 託管**（呼叫 `upload_local_image_to_cdn()`）。
+3. **發布前預檢（Pre-flight Check）**：驗證所有 `<img>` 狀態為 200 OK。
+雙向同步歸檔 SOP (Bi-directional Sync)
+
+每當產出全新主題時，必須同步寫入兩處：
+1. **人因生圖母庫存檔**：`02-health-noah/output/[編號]_[主題名稱]/`
+   * 包含：`blog_post.md`、`fb_post.txt`、`ig_post.txt`、`threads_post.txt`、`post_draft.md`、`image_prompts.md` 及 `codex_photo_final/`。
+2. **全通路發布佇列**：`20260826部落格自動上架/posts/staged_queue/[編號]_[主題名稱]/`
+   * 包含直連 CDN 配圖、標準語意化 Blogger 草稿檔與社群排程文案。
+
+---
+
+## 🎨 生圖肢體嚴格解剖防呆 (Strict Anatomy in Image Prompts)
+
+* 生成人物真實情境底圖時，必須在 Prompt 明確指定：
+  * `Taiwanese / Asian person`（在地化人物）。
+  * **嚴格肢體約束**：`Exact two arms and two hands, anatomically correct body, no extra limbs, no phantom arms`。
+  * 明確指定兩隻手的各自位置（如：左手放膝蓋、右手握扶手），徹底杜絕多生手臂或背後懸空抓握的 AI 偽影。
+
+---
+
+## 🚗 核心哲學：演講級「身體折舊論」與「身體使用說明書」
+
+撰寫任何文章或回答生活痛點時，必須貫徹以下核心洞見：
+
+1. **身體也會「折舊」（Body Depreciation）**：
+   * 人的身體跟汽車一樣，每天都在折舊。
+   * 如果開車天天壓坑洞、輪胎歪了還硬開，零件一定提早報廢；人體長時間處在不對的桌椅、高度與姿勢下，關節與肌肉就是在「超速折舊」。
+2. **「每天花 30 分鐘修車，卻花 8 小時在撞車」**：
+   * 點破讀者痛點：去診所做復健、熱敷電療雖然舒服，但一回到家/辦公室，又坐回不對的椅子、用太低的洗碗槽洗碗，等於天天一邊修車一邊加速磨損。
+3. **人因工程是「身體的使用說明書」**：
+   * 懂人因工程不是讀生硬論文，而是學會使用這份說明書。
+   * 只要在生活裡**微調 3 公分的高度、換個發力手勢、墊個小腳凳**，就能大幅降低折舊速度，讓好體力多用好幾十年。
+
+---
+
+## 🛡️ 圖片發布三不原則（防破圖鐵律）
+
+1. **嚴禁使用 Placeholder（假佔位網址）**：
+   * 任何包含 `_placeholder`、`預設封面圖`、`localhost` 或未上傳路徑的圖片，**一律嚴禁發布**。
+2. **強制直連 CDN 託管**：
+   * 所有配圖必須調用 `src/image_handler.py` 的 `upload_local_image_to_cdn()` 上傳至永久直連圖床，取得真實有效 URL。
+3. **發布前預檢（Pre-flight Check）**：
+   * 發布前必須對所有 `<img>` 標籤的 `src` 執行 HTTP HEAD 狀態檢測（必須回傳 200 OK）。
+
+---
+
+## 🏷️ 標籤與文末導流盒規則
+
+1. **Blogger 標籤數量上限**：單篇嚴格控制在 **12 ~ 16 個** 核心標籤（避免超過 Blogger 20 個上限觸發 400 錯誤）。
+2. **基礎必備標籤**：`人因小管家`、`Noah`、`人因工程`、`生活人因`。
+3. **文末導流盒**：每篇文章末尾必須附帶主題關鍵字標籤群與「👉 開啟【🌿 全場景人因工程知識地圖】」內部連結。

@@ -36,7 +36,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--incorrect-bullet", action="append", default=[])
     parser.add_argument("--fb-correct-line", action="append", default=[])
     parser.add_argument("--fb-incorrect-line", action="append", default=[])
-    parser.add_argument("--fb-note", default="")
+    parser.add_argument(
+        "--dual-correct",
+        action="store_true",
+        help="Treat both left and right images as correct sequential steps or methods (both green labels).",
+    )
     parser.add_argument(
         "--transparent-output",
         action="store_true",
@@ -158,16 +162,26 @@ def draw_center(draw, y: int, text: str, font_obj, fill, canvas_w: int) -> int:
 
 
 def draw_lines(draw, x: int, y: int, lines: list[str], font_obj, fill, gap: int = 8):
-    for line in lines:
+def draw_lines(draw, x: int, y: int, lines: list[str], fonts, color, gap: int = 14):
+    for index, line in enumerate(lines, start=1):
+        r = 17
+        cx = x + r
+        cy = y + r + 2
+        draw.ellipse((cx - r, cy - r, cx + r, cy + r), fill=color)
+        bbox_n = draw.textbbox((0, 0), str(index), font=fonts["fb_circle"])
+        nw, nh = bbox_n[2] - bbox_n[0], bbox_n[3] - bbox_n[1]
+        draw.text((cx - nw // 2, cy - nh // 2 - 2), str(index), font=fonts["fb_circle"], fill=WHITE)
+        
+        clean_text = re.sub(r'^[•\-\d\.\s]+', '', line)
         draw.text(
-            (x, y),
-            line,
-            font=font_obj,
-            fill=fill,
+            (x + 48, y),
+            clean_text,
+            font=fonts["fb_body_title"],
+            fill=WHITE,
             stroke_width=1,
-            stroke_fill=(0, 0, 0, 120),
+            stroke_fill=(0, 0, 0, 140),
         )
-        y += text_size(draw, line, font_obj)[1] + gap
+        y += text_size(draw, clean_text, fonts["fb_body_title"])[1] + gap
     return y
 
 
@@ -207,11 +221,11 @@ def make_fb(args, fonts, paths):
     canvas = Image.new("RGBA", (width, height), bg)
     canvas.alpha_composite(left, (0, 0))
     canvas.alpha_composite(right, (width // 2, 0))
-    canvas.alpha_composite(gradient_overlay((width, height), 185, 0, 520, True), (0, 0))
-    canvas.alpha_composite(gradient_overlay((width, height), 110, 0, 420, False), (0, 0))
-    canvas.alpha_composite(side_gradient((width // 2, height), 105, 390, True), (0, 0))
+    canvas.alpha_composite(gradient_overlay((width, height), 205, 0, 520, True), (0, 0))
+    canvas.alpha_composite(gradient_overlay((width, height), 195, 0, 480, False), (0, 0))
+    canvas.alpha_composite(side_gradient((width // 2, height), 110, 390, True), (0, 0))
     canvas.alpha_composite(
-        side_gradient((width - width // 2, height), 105, 390, False),
+        side_gradient((width - width // 2, height), 110, 390, False),
         (width // 2, 0),
     )
     draw = ImageDraw.Draw(canvas)
@@ -225,15 +239,15 @@ def make_fb(args, fonts, paths):
         fonts["fb_tag"],
         RED,
     )
-    draw_lines(draw, 80, 790, args.fb_correct_line, fonts["fb_body_title"], WHITE, 12)
+    draw_lines(draw, 76, 830, args.fb_correct_line, fonts, GREEN, 14)
     draw_lines(
         draw,
-        width // 2 + 80,
-        790,
+        width // 2 + 76,
+        830,
         args.fb_incorrect_line,
-        fonts["fb_body_title"],
-        WHITE,
-        12,
+        fonts,
+        RED,
+        14,
     )
     if args.fb_note:
         draw.text(
@@ -329,6 +343,7 @@ def main():
         "fb_tag": load_font(font_dir, "GenSenRounded2-B.ttc", 40),
         "fb_body_title": load_font(font_dir, "GenSenRounded2-B.ttc", 36),
         "fb_body": load_font(font_dir, "GenSenRounded2-M.ttc", 28),
+        "fb_circle": load_font(font_dir, "GenSenRounded2-H.ttc", 24),
         "ig_title": load_font(font_dir, "GenSenRounded2-H.ttc", 60),
         "ig_tag": load_font(font_dir, "GenSenRounded2-B.ttc", 34),
         "ig_body_title": load_font(font_dir, "GenSenRounded2-B.ttc", 34),
