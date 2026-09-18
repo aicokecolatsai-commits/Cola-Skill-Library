@@ -137,3 +137,10 @@ tags: [主題tag, 精煉筆記]
 - 單課一資料夾：`videos/ 逐字稿/ 精煉筆記/ _subtitles/ _mp3/ _transcripts/ _v2/`（Hahow 用 `ch01 ch02…`，知識衛星用 `01~NN`，小課用 `NN-標題`）。
 - 每集存檔成功才做下一集（Hahow 強制單線程）； finishes 回報筆數/bytes/末段文字/檔案大小/頁數＋缺集清單。
 - 批次結束統計：逐字稿數、v2數、密涅瓦數、缺漏表。
+
+## 7. 英文素材特例
+
+- 轉寫：同 Groq 管線，但**跳過 apply_vocab.py**（它會把 Cloud/cloud 全換成 Claude，英文談雲端即毀稿）；`raw.srt` 直接複製為 `clean.srt` 再 validate。
+- v2／密涅瓦：照產**繁中**，英文專有名詞保留原文括號附註；Mermaid 節點用英文原文＋中文對照。
+- 密涅瓦金句：英文短句每條≤10 words（中文仍十字）。
+- 存檔：不另建英文區，同主題夾、一課一夾；檔名用英文原標（ASCII 本來就安全）；frontmatter 加 `lang: en`、tags 加 `英文`；逐字稿留英文原文不翻；index.md 加註「原文為英文，摘要為中文」。
