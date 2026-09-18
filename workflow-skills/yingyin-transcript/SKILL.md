@@ -34,7 +34,7 @@ description: 影音轉運站專用：影片/Podcast/課程轉逐字稿＋精煉�
 
 | 平台 | 抓法 | 關鍵點 |
 |------|------|--------|
-| YouTube | `yt-dlp.exe --no-update --list-subs` 有就下字幕，無才 `-x --audio-format mp3` | 中間檔用 ASCII 檔名避 cp950 亂碼 |
+| YouTube | `yt-dlp.exe --no-update --list-subs` 有就下字幕，無才 `-x --audio-format mp3` | 中間檔用 ASCII 檔名避 cp950 亂碼；yt-dlp.exe 若無法執行改用 `python -m yt_dlp`（參數相同） |
 | Podcast（Apple/Spotify/SoundOn/YT） | firecrawl 抓 Apple 頁拿標題+SoundOn 連結 → SoundOn player 頁拿 `og:audio`（302 真 mp3）→ 找不到才找同集 YT 版 | Spotify/Apple 中文集幾乎無內建稿，不浪費時間找 |
 | PressPlay | Playwright 登入（認 `dtx_Cola`）→ iframe `src^="/vp/"` → 找 `^\d{2}:\d{2}$` 時間碼，parent last-child 即字幕 → `[{time,text}]` | 出現 iframe 立刻抓（會自動跳轉）；<200筆/10分或顯示同步中＝失敗重抓 |
 | Hahow | 開 classroom → 先讀左側單元一覽回報章/集 → 逐集單線程：evaluate 找標題往上找 `cursor=pointer` 父元素點入 → 點「逐字稿」tab → `querySelectorAll('p')` 過濾 `offsetParent!==null` | 無稿顯示「尚未提供」才走 jwplayer HLS：`jwplayer().getPlaylist()[0].sources[0].file` 立刻 ffmpeg 下 mp3（簽章時效短）；導讀缺稿記缺集不硬湊；特殊符號用短關鍵字 |
@@ -117,6 +117,7 @@ tags: [主題tag, 精煉筆記]
 - 變體：深挖版 40系（三節各恰好40條：40心法/40觀念/40行動，每條1-3行、忠於稿）。
 - 集數多用 Task 平行（每批4-5集，PressPlay 8-12篇），每批都要足數。
 - 驗證：txt>5000字才算成功；md 必含 15+15+15（或40+40+40），缺一段重補。
+- 內容量分級：逐字稿 <2000字（Shorts/短片約<2分鐘）走精簡版（摘要＋流程＋5心法＋5觀念＋5行動＋Mermaid，檔名加 `精簡` 後綴，不硬湊15）；≥5000字走標準15系；長課可選40系。密涅瓦同理：短片只萃取有據部分，L1-L5 從缺留空不硬寫。
 - 可選：多集 `綜合摘要-v2.md`（15+15+15＋全課程流程總覽）＋ Word 整合（python-docx、A4、微軟正黑體、封面＋目錄＋每集分頁，Heading1 18pt、Heading2 14pt、內文11pt）。
 
 ### C. 密涅瓦 `NN-標題-密涅瓦.md`（需要才產）
@@ -135,6 +136,7 @@ tags: [主題tag, 精煉筆記]
 - 每次建對照表：ASCII 代號 ↔ 中文檔名 ↔ 原始素材名，回報時附上。
 
 - 單課一資料夾：`videos/ 逐字稿/ 精煉筆記/ _subtitles/ _mp3/ _transcripts/ _v2/`（Hahow 用 `ch01 ch02…`，知識衛星用 `01~NN`，小課用 `NN-標題`）。
+- youtube轉固定四夾：`_mp3/ _subtitles/ _transcripts/ _v2/`，散檔禁止；單片中間檔（mp3/srt/txt）進對應夾，最終三種才放 _transcripts/_v2。
 - 每集存檔成功才做下一集（Hahow 強制單線程）； finishes 回報筆數/bytes/末段文字/檔案大小/頁數＋缺集清單。
 - 批次結束統計：逐字稿數、v2數、密涅瓦數、缺漏表。
 
