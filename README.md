@@ -95,6 +95,7 @@ Cola-Skill-Library/
 | **Shutdown 收工** | `workflow-skills/shutdown` | 收工, 結束了, 該同步的同步 | Git commit/push + Obsidian 工作筆記更新 + 三方同步 |
 | **職場人因文案專家** | `workflow-skills/職場人因文案專家` | 人因工程, 人體工學, 職場文案, 中高齡職場 | 吃情境或痛點描述，產出繁體中文職場人因工程社群文案 |
 | **影音轉運站** | `workflow-skills/yingyin-transcript` | 轉逐字稿, 影片轉mp3, SRT, 精煉筆記, 密涅瓦萃取, PressPlay/Hahow/知識衛星/podcast | YT/Podcast/課程轉逐字稿＋精煉v2（15/40系）＋密涅瓦萃取三種輸出，Groq/本地雙引擎 |
+| **audio-to-srt** | `workflow-skills/audio-to-srt` | 音訊轉字幕, 做SRT, 語音轉文字, 時間碼 | Groq word-level 轉寫＋resegment＋詞彙修正＋驗證五腳本，影音轉運站的底層引擎 |
 | **Ergo & PencilPlaybook** | `workflow-skills/ergo-pencil-playbook` | 反AI味, UI規則, 設計心理學, 席克定律, 費茨定律, Hallmark | 人因認知心理學 UI 規範 + Hallmark 反 AI 罐頭感視覺審美校準 |
 | **GSAP Motion Designer** | `workflow-skills/gsap-motion-designer` | GSAP, 網頁動效, 滾動動畫, ScrollTrigger, 時間軸, Lenis | GSAP 3 專業網頁動效、ScrollTrigger 滾動觸發與時間軸編排 |
 | **Conversion Landing Page** | `workflow-skills/conversion-landing-page` | 落地頁, Landing Page, 行銷頁面, 高轉化, CRO, Hero Section | 高轉化率落地頁與行銷頁面架構生成器 (7步黃金 CRO 骨架) |

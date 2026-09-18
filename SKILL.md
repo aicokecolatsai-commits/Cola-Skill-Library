@@ -21,7 +21,7 @@ description: Cola 跨平台 AI Agent 技能庫全集入口 — 提供高階工�
    * `meta-prompt`：YAML 結構化 Prompt 與系統指令架構師
    * `00_cola_ergo`：Noah 人因小管家圖卡與對比圖產生器
    * 學術系列：`academic-deep-research`、`academic-paper`、`academic-paper-reviewer`、`academic-pipeline`
-    * 內容與生活：`article-noah`、`cola-uiux-game-design`、`draw`、`職場人因文案專家`、`presentation-coach`、`resume-builder`、`habit-tracker`、`yingyin-transcript`（影音轉運站：逐字稿＋精煉＋密涅瓦）
+    * 內容與生活：`article-noah`、`cola-uiux-game-design`、`draw`、`職場人因文案專家`、`presentation-coach`、`resume-builder`、`habit-tracker`、`yingyin-transcript`（影音轉運站：逐字稿＋精煉＋密涅瓦）、`audio-to-srt`（音訊轉乾淨 SRT 底層引擎）
    * 專案流程：`project-init`、`startup`、`shutdown`
 
 2. **⚙️ 工程與寫作技能集 (Engineering Skills)**：
