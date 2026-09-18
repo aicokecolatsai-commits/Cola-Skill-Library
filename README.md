@@ -93,6 +93,7 @@ Cola-Skill-Library/
 | **Startup 開工** | `workflow-skills/startup` | 開工, 開始工作, 上次做到哪 | 讀取 Obsidian 工作筆記 + 檢查 Git 狀態 + 建議下一步 |
 | **Shutdown 收工** | `workflow-skills/shutdown` | 收工, 結束了, 該同步的同步 | Git commit/push + Obsidian 工作筆記更新 + 三方同步 |
 | **職場人因文案專家** | `workflow-skills/職場人因文案專家` | 人因工程, 人體工學, 職場文案, 中高齡職場 | 吃情境或痛點描述，產出繁體中文職場人因工程社群文案 |
+| **影音轉運站** | `workflow-skills/yingyin-transcript` | 轉逐字稿, 影片轉mp3, SRT, 精煉筆記, 密涅瓦萃取, PressPlay/Hahow/知識衛星/podcast | YT/Podcast/課程轉逐字稿＋精煉v2（15/40系）＋密涅瓦萃取三種輸出，Groq/本地雙引擎 |
 
 ---
 
