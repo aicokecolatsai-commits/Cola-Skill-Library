@@ -39,7 +39,8 @@ Cola-Skill-Library/
 │   ├── project-init/       # 新專案初始化
 │   ├── startup/            # 開工流程
 │   ├── shutdown/           # 收工流程
-│   └── 職場人因文案專家/     # 職場人因工程社群文案
+│   ├── 職場人因文案專家/     # 職場人因工程社群文案
+│   └── pdf-transit/        # PDF轉運站：PDF→MD→Groq中文精煉→學習庫歸檔
 │
 ├── engineering-skills/     # ⚙️ 工程與寫作技能集 (Matt Pocock 系列, 41 個)
 │
@@ -99,6 +100,7 @@ Cola-Skill-Library/
 | **Conversion Landing Page** | `workflow-skills/conversion-landing-page` | 落地頁, Landing Page, 行銷頁面, 高轉化, CRO, Hero Section | 高轉化率落地頁與行銷頁面架構生成器 (7步黃金 CRO 骨架) |
 | **Design MD Extractor** | `workflow-skills/design-md-extractor` | 提取網站風格, 抓取設計, 產生 DESIGN.md, 提取配色, Open Design | 網站設計風格逆向提取、Design Tokens 萃取與 DESIGN.md 生成器 |
 | **Cinematic Scrollytelling UI** | `workflow-skills/cinematic-scrollytelling-ui` | 電影感, 敘事UI, Apple風格, Scrollytelling, 沉浸式, Dark Luxury | 電影級敘事視覺、Apple 風格 Scrollytelling 滾動敘事與沉浸式互動設計 |
+| **PDF轉運站** | `workflow-skills/pdf-transit` | PDF轉md, 轉markdown, 中文精煉, 論文翻譯摘要, pdf轉運站 | PDF轉Markdown（標題/表格/圖片忠實保留）＋Groq免費中文精煉萃取＋歸檔第二大腦學習庫 |
 
 ---
 
