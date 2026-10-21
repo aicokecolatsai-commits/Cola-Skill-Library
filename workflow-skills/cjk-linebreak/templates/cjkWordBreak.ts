@@ -1,4 +1,4 @@
-// 模板來源：動齡 App（web-main/lib/cjkWordBreak.ts）。複製到專案後，把 PROTECTED_TERMS 的產品詞換成自己專案的品牌詞與專業用語。
+// 模板來源：動齡 App（web-main/lib/cjkWordBreak.ts），另外加上「網址與英文不拆開」的規則。複製到專案後，把 PROTECTED_TERMS 的產品詞換成自己專案的品牌詞與專業用語。
 // Split Chinese copy into words so lines only break between words (paired with `word-break: keep-all`).
 // Intl.Segmenter (ICU dictionary) mis-splits a few product and common terms; keep those whole.
 const PROTECTED_TERMS = [
@@ -39,7 +39,8 @@ export function splitCjkWords(text: string): string[] {
   const words: string[] = []
   for (const piece of pieces) {
     const last = words.length - 1
-    if (last >= 0 && (CLOSING.test(piece) || OPENING.test(words[last]))) words[last] += piece
+    const ascii = last >= 0 && /[!-~]$/.test(words[last]) && /^[!-~]/.test(piece) // keep URLs and English words whole
+    if (last >= 0 && (CLOSING.test(piece) || OPENING.test(words[last]) || ascii)) words[last] += piece
     else words.push(piece)
   }
   return words

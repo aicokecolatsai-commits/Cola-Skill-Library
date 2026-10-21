@@ -33,7 +33,7 @@ COMMON_TERMS = [
 ]
 
 CJK = re.compile(r"[㐀-鿿豈-﫿]")
-LATIN = re.compile(r"[A-Za-z0-9]")
+ASCII = re.compile(r"[!-~]")
 TAG = re.compile(r"(<[^>]+>)")
 SKIP_BLOCKS = ("script", "style", "title", "textarea", "pre", "code")
 
@@ -72,8 +72,8 @@ def add_breaks(text, parser, terms, show):
         if not any(start < b < end for start, end in spans)
         # 標點和空白本來就能換行，不需要再加 <wbr>
         and not text[b - 1].isspace() and not text[b].isspace()
-        # 英文單字與數字不可拆開
-        and not (LATIN.match(text[b - 1]) and LATIN.match(text[b]))
+        # 英文、數字、網址這類連續的半形字元不可拆開
+        and not (ASCII.match(text[b - 1]) and ASCII.match(text[b]))
     ]
     pieces = []
     previous = 0

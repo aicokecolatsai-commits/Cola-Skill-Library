@@ -1,6 +1,6 @@
 ---
 name: cjk-linebreak
-description: 中文斷詞換行技能（CJK line break / 中文不斷詞）。讓網頁上的中文只在詞與詞之間換行，不會出現「自｜己」「血｜壓」這種把詞拆成兩行的情況，電腦和手機都一樣。當使用者提到「斷詞」「斷行」「換行」「字被拆開」「詞被切斷」「中文換行很怪」「keep-all」「wbr」，或要建立、修改中文網頁、App 畫面、官網文案時載入。支援純靜態 HTML（事先插入 <wbr>）與 React／Next.js（畫面顯示時切詞）。
+description: 中文斷詞換行技能（CJK line break / 中文不斷詞）。讓網頁上的中文只在詞與詞之間換行，不會出現「自｜己」「血｜壓」這種把詞拆成兩行的情況，電腦和手機都一樣。當使用者提到「斷詞」「斷行」「換行」「字被拆開」「詞被切斷」「中文換行很怪」「keep-all」「wbr」，或要建立、修改中文網頁、部落格（Google Blogger、WordPress）、官網、App 畫面、電子報、簡報海報文案時載入。網頁通用：任何可以放 <script> 的頁面貼一段腳本即可；也支援靜態網站事先處理、React／Next.js 元件，以及不能放程式的平台與非網頁內容的手動檢查方法。
 ---
 
 # 中文斷詞換行技能
@@ -31,15 +31,40 @@ description: 中文斷詞換行技能（CJK line break / 中文不斷詞）。�
 - `word-break: break-all`：任意兩個字之間都能換行，等於沒處理。
 - `overflow-wrap: anywhere`：瀏覽器計算最小寬度時會把每個字都當成可以換行的位置。在 flex 或 grid 版面裡，容器可能因此縮得很窄，讓詞又被拆開。需要保底的話，改用 `break-word`。
 
-## 步驟 1：判斷網站類型，選擇做法
+## 步驟 1：判斷平台類型，選擇做法
 
-| 網站類型 | 做法 | 使用的檔案 |
+| 平台類型 | 做法 | 使用的檔案 |
 |---|---|---|
-| 純靜態 HTML（官網、活動頁、單頁網站） | **事先產生**：用 BudouX 斷詞，直接把 `<wbr>` 寫進 HTML | `scripts/add_wbr.py` |
-| React、Next.js、Vue 等（文案在程式裡，或由 API 回傳） | **畫面顯示時切詞**：用瀏覽器內建的 `Intl.Segmenter`，由元件插入 `<wbr>` | `templates/cjkWordBreak.ts`、`templates/CjkText.tsx` |
-| Markdown 或 CMS 產生的頁面 | 建置完成後，對輸出的 HTML 執行 `add_wbr.py` | `scripts/add_wbr.py` |
+| **可以放 `<script>` 的網頁**：Google Blogger、自架 WordPress、Wix、一般網站 | **網頁載入後切詞**：貼一段腳本就好，不需要建置、不需要套件。最通用 | `scripts/cjk-wbr.js` |
+| 純靜態 HTML（官網、活動頁、單頁網站） | **事先產生**：用 BudouX 斷詞，直接把 `<wbr>` 寫進 HTML。沒有 JavaScript 也有效 | `scripts/add_wbr.py` |
+| 靜態網站產生器（Hugo、Jekyll、Astro 等）、電子報 | 建置完成後，對輸出的 HTML 執行 `add_wbr.py` | `scripts/add_wbr.py` |
+| React、Next.js、Vue 等框架管理的畫面 | **元件切詞**：由元件插入 `<wbr>`。**不要用 `cjk-wbr.js`**，框架更新畫面時可能出錯 | `templates/cjkWordBreak.ts`、`templates/CjkText.tsx` |
+| 不能放程式的平台（Notion、Medium、Google 協作平台）、非網頁（Word、簡報、海報） | 手動決定換行位置，再逐行檢查 | `references/platforms.md` |
 
-### 1A. 純靜態 HTML
+**各平台的詳細步驟**（Blogger 要貼在哪裡、WordPress 用什麼外掛、電子報怎麼測試、Word 怎麼設定）都在 `references/platforms.md`。
+
+### 1A. 任何可以放 `<script>` 的網頁（含 Google Blogger）
+
+在 `</body>` 前面貼上：
+
+```html
+<script>
+  window.CJK_WBR = {
+    selector: ".post-body, .post-title", // 要處理的區塊；不寫就是整頁
+    terms: ["你的品牌名稱"],              // 不可拆開的詞
+    observe: false,                      // 留言區等之後才載入的內容，改成 true
+  }
+</script>
+<script src="cjk-wbr.js"></script>  <!-- 或把 scripts/cjk-wbr.js 的內容直接貼進 <script> -->
+```
+
+- 腳本會自動替處理過的區塊加上 `keep-all` 等 CSS，不需要另外改樣式。
+- 不會處理 `<code>`、`<pre>`、輸入框、可編輯區域；網址和英文不會被拆開。
+- 某個區塊不想處理，可以加上 `data-cjk-wbr-skip` 屬性。
+- Blogger 的主題是 XML，貼進「編輯 HTML」時要包在 `//<![CDATA[ … //]]>` 裡，細節見 `references/platforms.md`。
+- 缺點：在 JavaScript 執行之前，畫面會先用瀏覽器預設的方式換行。對換行很在意、又可以跑建置腳本的網站，改用 1B 事先處理。
+
+### 1B. 純靜態 HTML（事先處理）
 
 ```bash
 pip install budoux==0.9.3
@@ -51,7 +76,7 @@ python scripts/add_wbr.py site/index.html --terms tools/protected-terms.txt
 - `--terms` 指向專案自己的保護詞彙檔，一行一個詞，`#` 開頭是註解。通用詞彙已經內建在腳本裡。
 - 建議把腳本複製到專案的 `tools/`，並把執行方式寫進專案的 `AGENTS.md`，讓其他 agent 也知道。
 
-### 1B. React／Next.js
+### 1C. React／Next.js
 
 1. 把 `templates/cjkWordBreak.ts` 複製到 `lib/`，把 `templates/CjkText.tsx` 複製到共用元件資料夾。
 2. 在 `PROTECTED_TERMS` 補上專案的品牌詞和專業用語。
@@ -113,7 +138,7 @@ for (const term of ["自己", "血壓", "動齡"]) {
 
 處理完之後，在專案的 `AGENTS.md` 加上一段「中文換行」規則，讓之後修改文案的人（或 agent）知道：
 
-1. 改了文案要重新執行斷詞（靜態網站），或改用 `CjkText` 包住文字（React）。
+1. 改了文案要重新執行斷詞（靜態網站）、改用 `CjkText` 包住文字（React），或確認頁面有載入 `cjk-wbr.js`（部落格、一般網站）。
 2. 保護詞彙表放在哪裡，怎麼新增。
 3. 禁止使用 `break-all` 和 `overflow-wrap: anywhere`。
 4. 合併前要在 360 和 390px 寬度檢查。
@@ -130,12 +155,15 @@ for (const term of ["自己", "血壓", "動齡"]) {
 
 ## 附件
 
+- `scripts/cjk-wbr.js`：通用的網頁斷詞腳本（Blogger、WordPress、任何可以放 `<script>` 的頁面）
 - `scripts/add_wbr.py`：靜態 HTML 用的斷詞腳本（BudouX）
 - `scripts/check_linebreaks.js`：瀏覽器換行檢查腳本
 - `templates/cjkWordBreak.ts`、`templates/CjkText.tsx`、`templates/cjkWordBreak.test.ts`：React／Next.js 模板
 - `references/protected-terms.md`：通用保護詞彙與維護方式
+- `references/platforms.md`：各平台套用指南（Blogger、WordPress、Wix、靜態網站、電子報、手機 App、Notion 等無法套用的平台、Word 與簡報）
 
 ## 實際案例
 
 - 福聚徠官網（`bewellfutlife.com`，純靜態）：用 `add_wbr.py` 插入 `<wbr>`，在 360、390、768、1280px 檢查，詞中間換行 0 處。
 - 動齡 App（Next.js）：用 `lib/cjkWordBreak.ts` 加上 `CjkText` 元件，從護照和首頁等改版頁面開始，逐頁套用。
+- 模擬 Blogger 文章頁（`cjk-wbr.js`）：360px 寬度下文章區詞中間換行 0 處；網址、`<code>` 不受影響；之後才載入的留言也會處理。沒有指定處理的側欄仍有 2 處拆詞，可以當作對照。
