@@ -16,6 +16,7 @@ Cola-Skill-Library/
 ├── workflow-skills/        # 🧠 高階獨立與專家思維工作流技能
 │   ├── noah-ergo-image/    # Noah 人因小管家社群對比圖產圖工作流 (v2)
 │   ├── minerva-thinking/   # 密涅瓦大學 76 HCs 思考習慣與多元思維模型引導
+│   ├── cjk-linebreak/      # 中文斷詞換行：網頁中文只在詞與詞之間換行（BudouX / CjkText）
 │   ├── directing-ai/       # 指揮 AI 四步驟方法論（PRD規格書 / 打造專業分身 / 組隊思考 / RPG陪練）
 │   ├── humanizer-zh-tw/    # 繁中去 AI 腔與人性化寫作 (融合 24 條語病與瓦基人味雙核心)
 │   ├── grill-me/           # 嚴格質詢與思維壓力測試 (Grill-Me / Grilling)
@@ -73,6 +74,7 @@ Cola-Skill-Library/
 | :--- | :--- | :--- | :--- |
 | **Noah 人因對比圖 v2** | `workflow-skills/noah-ergo-image` | 人因圖片, 正確vs錯誤姿勢圖, Noah 社群圖, 做人因主題 | 吃主題產出 FB/IG/Threads 對比圖×5 + 文案×3，含串接介面可供其他工作流呼叫 |
 | **密涅瓦思考模式** | `workflow-skills/minerva-thinking` | 密涅瓦, HC分析, 思考模式, 決策評估, 批判思考 | 基於 Minerva University 100+ HCs，提供四階段決策重構與深層盲點檢驗 |
+| **中文斷詞換行** | `workflow-skills/cjk-linebreak` | 斷詞, 斷行, 換行, 字被拆開, keep-all, wbr | 網頁中文只在詞與詞之間換行；靜態 HTML 用 BudouX 腳本、React 用 CjkText 元件，附保護詞彙表與瀏覽器換行檢查腳本 |
 | **UI/UX Pro Max** | `workflow-skills/ui-ux-pro-max` | UI設計, 介面優化, 前端設計, 配色, Tailwind | 包含 50+ 風格、161 配色、React/Vue/Tailwind 模板的完整設計系統 |
 | **Brainstorming** | `workflow-skills/brainstorming` | 腦力激盪, 發想, 需求探索, 設計規劃 | 在實作任何功能前進行蘇格拉底式追問與架構定義 |
 | **Skill Creator** | `workflow-skills/skill-creator` | 建立技能, 優化技能, 技能評測 | Agent 技能開發、測試、benchmark 評測與自動最佳化工具 |
