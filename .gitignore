@@ -32,3 +32,6 @@ scratch/
 
 # Heavy local archive snapshot
 _archive/14-codex-skills/
+
+# 含未上線產品規劃，只留本機
+workflow-skills/newcolauiux/references/moveage-profile.md
