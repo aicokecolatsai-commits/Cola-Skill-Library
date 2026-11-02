@@ -41,7 +41,12 @@ Cola-Skill-Library/
 │   ├── startup/            # 開工流程
 │   ├── shutdown/           # 收工流程
 │   ├── 職場人因文案專家/     # 職場人因工程社群文案
-│   └── pdf-transit/        # PDF轉運站：PDF→MD→Groq中文精煉→學習庫歸檔
+│   ├── pdf-transit/        # PDF轉運站：PDF→MD→Groq中文精煉→依 ColaBrain AGENTS.md 歸檔（書／論文命名、全文進素材庫）
+│   ├── yingyin-transcript/ # 影音轉運站：影片／Podcast／課程→逐字稿＋精煉摘要＋密涅瓦萃取（依 AGENTS.md 命名與存放）
+│   ├── audio-to-srt/       # 音訊轉乾淨 SRT（Groq word-level／本地備援），影音轉運站底層引擎
+│   ├── line-agent-integration/ # LINE Agent 免費優先串接：需求釐清、逐步教學、真人轉接、部署驗收
+│   ├── newcolauiux/        # NewCola UIUX：人因工程與生活感介面規範（大字易讀、溫暖克制）
+│   └── cjk-linebreak/      # 中文斷詞換行：網頁中文只在詞與詞之間換行（Blogger／WordPress／BudouX／React）
 │
 ├── engineering-skills/     # ⚙️ 工程與寫作技能集 (Matt Pocock 系列, 41 個)
 │

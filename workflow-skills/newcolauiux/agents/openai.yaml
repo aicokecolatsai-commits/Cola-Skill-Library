@@ -1,0 +1,4 @@
+interface:
+  display_name: "NewCola UIUX"
+  short_description: "溫暖清楚的繁體中文介面規範，保留品牌、大字易讀、精簡卡片與真實操作"
+  default_prompt: "請使用 $newcolauiux，依現有品牌與功能優化這個介面，兼顧大字閱讀、精簡資訊與手機操作。"
